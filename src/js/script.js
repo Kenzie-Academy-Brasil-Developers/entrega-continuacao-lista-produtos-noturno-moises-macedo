@@ -1,7 +1,63 @@
 import produtos from './dataProdutos.js'
 
 const ul = document.querySelector('.containerListaProdutos ul');
-console.log("oi")
+
+
+const ListaCarrinho = (listaProdutos) =>{
+
+    ul.innerHTML = '';
+    
+    listaProdutos.forEach((produto) =>{
+        
+
+        const li = document.createElement('li');
+        const img = document.createElement('img');
+        const h3 = document.createElement('h3');        
+        const p = document.createElement('p');
+        const infoNutri = document.createElement('ol')
+       
+        const span = document.createElement('span');
+        
+        
+        
+        ///////////////////////////////////
+
+        img.src = produto.img;
+        img.alt = produto.nome;
+        h3.innerText = produto.nome;        
+        p.innerText = 'RS' + produto.preco;
+        span.innerText = produto.secao ;
+        
+
+        ///////////////////////////////////
+        p.style.fontSize = '13px'
+        p.style.marginTop = '7px'
+                
+        infoNutri.style.marginTop = "5px"
+
+        
+        
+
+        
+        ///////////////////////////////////
+
+        li.appendChild(img);
+        li.appendChild(h3);
+        li.appendChild(p);
+        li.appendChild(span);
+        li.appendChild(infoNutri);
+        
+        
+
+        ul.appendChild(li);
+
+        
+
+    });   
+
+ 
+
+}
 
 
 
@@ -18,10 +74,7 @@ const montarListaProdutos = (listaProdutos) =>{
         const h3 = document.createElement('h3');        
         const p = document.createElement('p');
         const infoNutri = document.createElement('ol')
-        const indexZero = document.createElement('li')
-        const indexUm = document.createElement('li')
-        const indexDois = document.createElement('li')
-        const indexTres = document.createElement('li')
+       
         const span = document.createElement('span');
         const buttonAddCarrinho = document.createElement('button');
         
@@ -31,34 +84,21 @@ const montarListaProdutos = (listaProdutos) =>{
         img.src = produto.img;
         img.alt = produto.nome;
         h3.innerText = produto.nome;        
-        p.innerText = 'RS' + produto.preco 
-        span.innerText = produto.secao 
-        buttonAddCarrinho.innerText = "adicionar ao Carrinho"
+        p.innerText = 'RS' + produto.preco ;
+        span.innerText = produto.secao ;
+        buttonAddCarrinho.innerText = "adicionar ao Carrinho";
         
 
-        indexZero.innerText = produto.componentes[0]
-        indexUm.innerText = produto.componentes[1]
-        indexDois.innerText = produto.componentes[2]
-        indexTres.innerText = produto.componentes[3] 
-        ///////////////////////////////////
-
-        
         ///////////////////////////////////
         p.style.fontSize = '13px'
-        p.style.marginTop = '7px'
-        ///////////////////////////////////
+        p.style.marginTop = '7px'       
         
         infoNutri.style.marginTop = "5px"
-        indexZero.style.fontSize = '11px'        
-        indexUm.style.fontSize = '11px'
-        indexDois.style.fontSize = '11px'
-        indexTres.style.fontSize = '11px'
+        
+        ///////////////////////////////////
 
         
 
-        
-        
-        
         ///////////////////////////////////
 
         li.appendChild(img);
@@ -67,18 +107,106 @@ const montarListaProdutos = (listaProdutos) =>{
         li.appendChild(span);
         li.appendChild(infoNutri);
         li.appendChild(buttonAddCarrinho);
-        infoNutri.appendChild(indexZero);
-        infoNutri.appendChild(indexUm);
-        infoNutri.appendChild(indexDois);
-        infoNutri.appendChild(indexTres);
+        
 
         ul.appendChild(li);
 
-    });  
-    
+
+        //////////////////////////////////
+
+        for(let contador=0; contador < produto.componentes.length; contador++){
+
+            const listaLi = document.createElement('li');
+
+            listaLi.innerText = produto.componentes[contador];
+
+            infoNutri.appendChild(listaLi);            
+
+        }
+
+        function addCarrinho () {  
+            
+            const produtosCarrinho = document.querySelector('.containerPrecoTotal');
+            
+            const li = document.createElement('li');
+            const img = document.createElement('img');
+            const h3 = document.createElement('h3');        
+            const p = document.createElement('p');
+            const infoNutri = document.createElement('ol')
+        
+            const span = document.createElement('span');
+            
+            
+            
+            ///////////////////////////////////
+
+            img.src = produto.img;
+            img.alt = produto.nome;
+            h3.innerText = produto.nome;        
+            p.innerText = 'RS' + produto.preco;
+            span.innerText = produto.secao ;
+            
+
+            ///////////////////////////////////
+            p.style.fontSize = '13px'
+            p.style.marginTop = '7px'
+            img.style.width = "60px"
+                    
+            infoNutri.style.marginTop = "5px"
+
+            li.style.height = '70px'
+
+            span.style.fontSize = '12px'
+
+            
+            
+
+            
+            ///////////////////////////////////
+
+            li.appendChild(img);
+            li.appendChild(h3);
+            li.appendChild(p);
+            li.appendChild(span);
+            li.appendChild(infoNutri);
+        
+        
+
+            produtosCarrinho.appendChild(li);
+
+            
+        }  
+           
+
+          
+        
+        buttonAddCarrinho.addEventListener('click', addCarrinho);
+
+    });    
+
     
 
 }
+
+// const MostraPreco=(arrayProdutos) =>{
+
+//     const precoTotal = document.querySelector('#precoTotal');
+//     const NumeroInt = Number(produtos.preco)
+
+    
+
+//     const SomandoTudo = arrayProdutos.reduce((Acumulador, produto) => {
+
+
+//         return  NumeroInt(Acumulador + produto)
+//     }, 0);
+
+//     //montarListaProdutos(SomandoTudo);
+
+//     precoTotal.innerText= SomandoTudo
+
+// }
+
 
 
 
@@ -100,11 +228,13 @@ const botaoMostrarHortifruti = document.querySelector('.estiloGeralBotoes--filtr
 botaoMostrarHortifruti.addEventListener('click', filtrarPorHortiFruti);
 
 
+
 /////////////////////////////////////////
 
 
 
 const mostrartodos = () =>{
+
 
     const listaTodosprodutos = produtos.filter((produto) => {
 
@@ -118,6 +248,157 @@ const mostrartodos = () =>{
 
 const botaoMostrarTodos = document.querySelector('.estiloGeralBotoes--mostrarTodos');
 botaoMostrarTodos.addEventListener('click', mostrartodos);
+
+/////////////////////////////////////////
+
+//PROMOÇÕES//
+
+
+
+////////////// HTML DOS CARDS EM PROMOÇÃO//////////////////
+
+
+const baratoDoDia = (listaProdutos) =>{
+
+    ul.innerHTML = '';
+    
+    listaProdutos.forEach((produto) =>{
+        
+
+        const li = document.createElement('li');
+        const img = document.createElement('img');
+        const h3 = document.createElement('h3');        
+        const p = document.createElement('p');
+        const infoNutri = document.createElement('ol')
+       
+        const span = document.createElement('span');
+        const buttonAddCarrinho = document.createElement('button');
+        
+        
+        ///////////////////////////////////
+
+        img.src = produto.img;
+        img.alt = produto.nome;
+        h3.innerText = produto.nome;        
+        p.innerText = 'RS' + produto.precoPromocao ;
+        span.innerText = produto.secao ;
+        buttonAddCarrinho.innerText = "adicionar ao Carrinho";
+        
+
+        ///////////////////////////////////
+        p.style.fontSize = '13px'
+        p.style.marginTop = '7px'
+                
+        infoNutri.style.marginTop = "5px"
+
+        buttonAddCarrinho.classList.add('button');
+        
+
+        
+        ///////////////////////////////////
+
+        li.appendChild(img);
+        li.appendChild(h3);
+        li.appendChild(p);
+        li.appendChild(span);
+        li.appendChild(infoNutri);
+        li.appendChild(buttonAddCarrinho);
+        
+
+        ul.appendChild(li);
+
+
+        //////////////////////////////////
+
+        for(let contador=0; contador < produto.componentes.length; contador++){
+
+            const listaLi = document.createElement('li');
+
+            listaLi.innerText = produto.componentes[contador];
+
+            infoNutri.appendChild(listaLi);            
+
+        }
+        function addCarrinho () {  
+            
+            const produtosCarrinho = document.querySelector('.containerPrecoTotal');
+            
+            const li = document.createElement('li');
+            const img = document.createElement('img');
+            const h3 = document.createElement('h3');        
+            const p = document.createElement('p');
+            const infoNutri = document.createElement('ol')
+        
+            const span = document.createElement('span');
+            
+            
+            
+            ///////////////////////////////////
+
+            img.src = produto.img;
+            img.alt = produto.nome;
+            h3.innerText = produto.nome;        
+            p.innerText = 'RS' + produto.precoPromocao ;
+            span.innerText = produto.secao ;
+            
+
+            ///////////////////////////////////
+            p.style.fontSize = '13px'
+            p.style.marginTop = '7px'
+            img.style.width = "60px"
+                    
+            infoNutri.style.marginTop = "5px"
+
+            li.style.height = '70px'
+
+            span.style.fontSize = '12px'
+
+            
+            
+
+            
+            ///////////////////////////////////
+
+            li.appendChild(img);
+            li.appendChild(h3);
+            li.appendChild(p);
+            li.appendChild(span);
+            li.appendChild(infoNutri);
+        
+        
+
+            produtosCarrinho.appendChild(li);
+
+            
+        }
+        buttonAddCarrinho.addEventListener('click', addCarrinho);
+
+    });    
+
+    
+
+}
+
+
+////////////FILTRO DE ITENS PROMOCIONAIS///////////
+
+const promocao = () =>{
+
+    
+
+    const listaPromo = produtos.filter((produto) => {
+
+        return produto.promocao === true  
+
+    })   
+
+    
+    baratoDoDia(listaPromo);
+
+}
+const botaoBaratoDia = document.querySelector('.estiloGeralBotoes--filtrarBarato');
+
+botaoBaratoDia.addEventListener('click', promocao);
 
 
 
@@ -138,6 +419,8 @@ const inputPesquisa= () => {
 
 const botaoBusca = document.querySelector('.estiloGeralBotoes--botaoBuscaPorNome');
 botaoBusca.addEventListener('click', inputPesquisa);
+
+////////////////////////////////////////////////
 
 
 
