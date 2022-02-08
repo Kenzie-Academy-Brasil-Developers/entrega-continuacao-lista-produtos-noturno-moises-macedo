@@ -47,8 +47,6 @@ const ListaCarrinho = (listaProdutos) =>{
         li.appendChild(span);
         li.appendChild(infoNutri);
         
-        
-
         ul.appendChild(li);
 
         
@@ -56,9 +54,7 @@ const ListaCarrinho = (listaProdutos) =>{
     });   
 
  
-
 }
-
 
 
 
@@ -97,9 +93,6 @@ const montarListaProdutos = (listaProdutos) =>{
         
         ///////////////////////////////////
 
-        
-
-        ///////////////////////////////////
 
         li.appendChild(img);
         li.appendChild(h3);
@@ -136,8 +129,6 @@ const montarListaProdutos = (listaProdutos) =>{
         
             const span = document.createElement('span');
             
-            
-            
             ///////////////////////////////////
 
             img.src = produto.img;
@@ -158,10 +149,6 @@ const montarListaProdutos = (listaProdutos) =>{
 
             span.style.fontSize = '12px'
 
-            
-            
-
-            
             ///////////////////////////////////
 
             li.appendChild(img);
@@ -353,10 +340,6 @@ const baratoDoDia = (listaProdutos) =>{
 
             span.style.fontSize = '12px'
 
-            
-            
-
-            
             ///////////////////////////////////
 
             li.appendChild(img);
